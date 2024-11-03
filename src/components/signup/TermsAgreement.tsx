@@ -2,8 +2,17 @@ import { useState } from "react";
 import Title from "../common/Title";
 import Checkbox from "./Checkbox";
 
-const TermsAgreement = () => {
-  const [checkboxes, setCheckboxes] = useState([
+interface Props {
+  handleLoginStep: (step: number) => void;
+}
+interface Checkboxes {
+  id: string;
+  text: string;
+  checked: boolean;
+}
+
+const TermsAgreement: React.FC<Props> = ({ handleLoginStep }) => {
+  const [checkboxes, setCheckboxes] = useState<Checkboxes[]>([
     {
       id: "all",
       text: "다음 항목에 모두동의",
@@ -84,7 +93,9 @@ const TermsAgreement = () => {
         </ul>
       </div>
 
-      <button className="mt-auto">다음</button>
+      <button className="mt-auto" onClick={() => handleLoginStep(1)}>
+        다음
+      </button>
     </>
   );
 };
