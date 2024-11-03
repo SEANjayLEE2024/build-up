@@ -1,9 +1,11 @@
+import { ReactNode } from "react";
+
 interface props {
-  text: string;
+  children: ReactNode;
 }
 
-const Title: React.FC<props> = ({ text }) => {
-  return <p className="font-bold text-2xl pb-8 tracking-custom">{text}</p>;
+const Title: React.FC<props> = ({ children }) => {
+  return <p className="font-bold text-2xl pb-8 tracking-custom">{children}</p>;
 };
 
 export default Title;

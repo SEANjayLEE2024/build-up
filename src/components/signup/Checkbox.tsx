@@ -8,8 +8,10 @@ interface Props {
 }
 
 const Checkbox: React.FC<Props> = ({ children, id, checked, onChange }) => {
+  const classes = id === "all" ? "border py-4 rounded-2xl" : "";
+
   return (
-    <div className="flex justify-between mb-4">
+    <div className={`flex justify-between mb-4 px-5 ${classes}`}>
       <div className="flex items-center">
         <input
           type="checkbox"

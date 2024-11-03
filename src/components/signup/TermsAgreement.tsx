@@ -21,7 +21,7 @@ const TermsAgreement = () => {
     },
     {
       id: "marketing",
-      text: "[필수] 마케팅 정보 수신 동의",
+      text: "[선택] 마케팅 정보 수신 동의",
       checked: false,
     },
   ]);
@@ -60,27 +60,31 @@ const TermsAgreement = () => {
 
   return (
     <>
-      <Title text="서비스 이용약관에 동의해주세요" />
+      <div>
+        <Title>서비스 이용약관에 동의해주세요</Title>
 
-      <ul>
-        <Checkbox
-          id={checkboxes[0].id}
-          checked={checkboxes[0].checked}
-          onChange={handleAllCheckboxChange}
-        >
-          {checkboxes[0].text}
-        </Checkbox>
-        {checkboxes.slice(1).map((list) => (
+        <ul>
           <Checkbox
-            key={list.id}
-            id={list.id}
-            checked={list.checked}
-            onChange={() => handleCheckboxChange(list.id)}
+            id={checkboxes[0].id}
+            checked={checkboxes[0].checked}
+            onChange={handleAllCheckboxChange}
           >
-            {list.text}
+            {checkboxes[0].text}
           </Checkbox>
-        ))}
-      </ul>
+          {checkboxes.slice(1).map((list) => (
+            <Checkbox
+              key={list.id}
+              id={list.id}
+              checked={list.checked}
+              onChange={() => handleCheckboxChange(list.id)}
+            >
+              {list.text}
+            </Checkbox>
+          ))}
+        </ul>
+      </div>
+
+      <button className="mt-auto">다음</button>
     </>
   );
 };
