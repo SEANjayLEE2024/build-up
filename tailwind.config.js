@@ -4,7 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        main: "#333333",
+        main: "#14151A",
+      },
+      boxShadow: {
+        light: "0px 1px 2px 0px rgba(20, 21, 26, 0.05)",
+      },
+      borderColor: {
+        gray: "#DEE0E3",
       },
     },
   },
