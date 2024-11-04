@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         main: "#14151A",
+        gray: "#0D112666",
       },
       boxShadow: {
         light: "0px 1px 2px 0px rgba(20, 21, 26, 0.05)",
