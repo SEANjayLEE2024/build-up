@@ -5,14 +5,14 @@ import Checkbox from "./Checkbox";
 interface Props {
   handleLoginStep: (step: number) => void;
 }
-interface Checkboxes {
+interface CheckboxType {
   id: string;
   text: string;
   checked: boolean;
 }
 
 const TermsAgreement: React.FC<Props> = ({ handleLoginStep }) => {
-  const [checkboxes, setCheckboxes] = useState<Checkboxes[]>([
+  const [checkboxes, setCheckboxes] = useState<CheckboxType[]>([
     {
       id: "all",
       text: "다음 항목에 모두동의",
@@ -93,7 +93,11 @@ const TermsAgreement: React.FC<Props> = ({ handleLoginStep }) => {
         </ul>
       </div>
 
-      <button className="mt-auto" onClick={() => handleLoginStep(1)}>
+      <button
+        className="mt-auto"
+        onClick={() => handleLoginStep(1)}
+        disabled={!checkboxes[1].checked || !checkboxes[2].checked}
+      >
         다음
       </button>
     </>
