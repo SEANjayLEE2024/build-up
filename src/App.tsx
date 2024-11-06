@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import MainPage from "./pages/Main";
 import SignupPage from "./pages/Signup";
-import LoginPage from "./pages/Login";
 import MyClubPage from "./pages/Myclub";
 
 const router = createBrowserRouter([
@@ -13,7 +12,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: "signup", element: <SignupPage /> },
-      { path: "login", element: <LoginPage /> },
       { path: "myclub", element: <MyClubPage /> },
     ],
   },
