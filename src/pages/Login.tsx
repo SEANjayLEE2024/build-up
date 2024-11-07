@@ -1,8 +1,10 @@
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
+
 const LoginPage = () => {
   return (
-    <>
-      <h5>로그인페이지</h5>
-    </>
+    <div className="w-1/2 mx-auto mt-60">
+      <GoogleLoginButton />
+    </div>
   );
 };
 
