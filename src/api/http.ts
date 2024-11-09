@@ -7,10 +7,13 @@ const createClient = (config?: AxiosRequestConfig) => {
     baseURL: BASE_URL,
     headers: {
       "Content-Type": "application/json",
+      ...config?.headers,
     },
     withCredentials: true,
     ...config,
   });
+
   return axiosInstance;
 };
+
 export const httpClient = createClient();
