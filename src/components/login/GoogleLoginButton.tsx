@@ -1,5 +1,6 @@
-import { GoogleLogin } from "@react-oauth/google";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
+import { httpClient } from "../../api/http";
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -8,8 +9,31 @@ interface CredentialResponse {
 }
 
 const GoogleLoginButton = () => {
-  const onSuccessGoogle = (credentialResponse: CredentialResponse) => {
-    console.log("credentialResponse", credentialResponse);
+  const navigate = useNavigate();
+
+  const onSuccessGoogleLogin = async (
+    credentialResponse: CredentialResponse
+  ) => {
+    /* 임시 */
+    try {
+      const response = await httpClient.post("unknown", {
+        token: credentialResponse.credential,
+      });
+      const data = response.data;
+
+      if (data.isNewUser) {
+        navigate("/signup");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      /* 에러처리 생각중 */
+      console.log(error);
+    }
+  };
+
+  const onErrorGoogleLogin = (error: void) => {
+    console.log(error);
   };
 
   return (
@@ -17,10 +41,8 @@ const GoogleLoginButton = () => {
       {CLIENT_ID && (
         <GoogleOAuthProvider clientId={CLIENT_ID}>
           <GoogleLogin
-            onSuccess={onSuccessGoogle}
-            onError={() => {
-              console.log("Login Failed");
-            }}
+            onSuccess={onSuccessGoogleLogin}
+            onError={onErrorGoogleLogin}
           ></GoogleLogin>
         </GoogleOAuthProvider>
       )}
