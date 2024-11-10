@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 import Checkbox from "./Checkbox";
 
 interface Props {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TermsAgreement from "../components/signup/TermsAgreement";
-import SetProfile from "../components/signup/SetProfile";
+import TermsAgreement from "../components/signup/terms/TermsAgreement";
+import SetProfile from "../components/signup/profile/SetProfile";
 
 const SignupPage = () => {
   const [step, setStep] = useState<number>(1);

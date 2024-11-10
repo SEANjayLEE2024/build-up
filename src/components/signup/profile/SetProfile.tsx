@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { UserProfile } from "../../models/signup.model";
-import Title from "../common/Title";
-import informationImg from "../../assets/images/information-line.png";
+import { UserProfile } from "../../../models/signup.model";
+import Title from "../../common/Title";
+import informationImg from "../../../assets/images/information-line.png";
 
 const NICKNAME_MAX_LENGTH = 20;
 const NICKNAME_ALLOW_PATTERN = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;
