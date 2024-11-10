@@ -4,14 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        main: "#14151A",
-        gray: "#0D112666",
+        "base-primary": "#14151A",
+        "base-tertiary": "#0D112666",
+        "base-secondary": "rgba(15, 19, 36, 0.6)",
+        "base-secondary-hover": "#F7F7F8",
+        "base-inverted": "#0B0C0E",
+        "action-normal": "#DEE0E3",
+        "focus-destructive-light": "#F08B85",
       },
       boxShadow: {
-        light: "0px 1px 2px 0px rgba(20, 21, 26, 0.05)",
-      },
-      borderColor: {
-        gray: "#DEE0E3",
+        "base-light": "0px 1px 2px 0px rgba(20, 21, 26, 0.05)",
+        "focus-gray": "0px 0px 0px 2px #BFC0C4",
+        "focus-red": "0px 0px 0px 2px #FFB2B299",
       },
     },
   },
