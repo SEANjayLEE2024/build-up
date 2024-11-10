@@ -20,18 +20,21 @@ const SelectNationModal: React.FC<PropsType> = ({ closeModal }) => {
   const [nationList, setNationList] = useState<Nation[]>([]);
   const getNations = async () => {
     try {
+      /* 무료 국가명, 국기img api */
       const response = await httpClient("https://restcountries.com/v3.1/all");
       const data: Nation[] = response.data;
-      const sortedData = data.sort((a, b) =>
-        a.name.common.localeCompare(b.name.common)
-      );
-      const southKoreaIndex = sortedData.findIndex(
+
+      const sortedData = data
+        .filter((nation) => nation.name.common !== "South Korea")
+        .sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+      const southKorea = data.find(
         (nation) => nation.name.common === "South Korea"
       );
-      if (southKoreaIndex !== -1) {
-        const [southKorea] = sortedData.splice(southKoreaIndex, 1);
+      if (southKorea) {
         sortedData.unshift(southKorea);
       }
+
       setNationList(sortedData);
     } catch (error) {
       console.log(error);
