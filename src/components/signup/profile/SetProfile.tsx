@@ -64,18 +64,27 @@ const SetProfile = () => {
     }
   };
 
+  const onSelectGender = (value: number) => {
+    setProfile((prev) => ({ ...prev, gender: value }));
+  };
+
   return (
     <>
       <form onSubmit={onsubmit}>
         <Title>빌드업 정보 입력하기</Title>
 
-        <section>
-          <p className="text-sm font-medium mb-2">
+        <section className="mb-4">
+          <p className="text-sm font-medium mb-2 py-0.5">
             닉네임 <span className="text-red-600">*</span>
           </p>
-
           <div>
-            <div className="shadow-light border border-gray rounded-xl p-3 flex justify-between items-center gap-1 text-sm">
+            <div
+              className={`base-light border rounded-xl p-3 flex justify-between items-center gap-1 text-sm ${
+                !nicknameErrorText
+                  ? "border-action-normal focus-within:border-base-inverted focus-within:shadow-focus-gray"
+                  : "border-focus-destructive-light focus-within:shadow-focus-red"
+              }`}
+            >
               <input
                 className="flex-1 min-w-12 outline-none"
                 type="text"
@@ -85,14 +94,14 @@ const SetProfile = () => {
                 onKeyDown={onKeyDownNickname}
                 onBlur={onBlurNickname}
               />
-              <p className="text-gray">
+              <p className="text-base-tertiary">
                 <span>{profile.nickname.length}</span>/
                 <span>{NICKNAME_MAX_LENGTH}</span>
               </p>
             </div>
 
             <p
-              className={`flex text-[0.8125rem] gap-1 items-center mt-2 text-gray ${
+              className={`flex text-[0.8125rem] gap-1 items-center mt-2 text-base-tertiary ${
                 nicknameErrorText ? "text-red-600" : ""
               }`}
             >
@@ -116,6 +125,41 @@ const SetProfile = () => {
                 : nicknameErrorText}
             </p>
           </div>
+        </section>
+
+        <section className="mb-4">
+          <p className="text-sm font-medium mb-2 py-0.5">
+            성별 <span className="text-red-600">*</span>
+          </p>
+          <div className="`base-light border border-action-normal rounded-xl flex justify-between items-center text-sm overflow-hidden">
+            <button
+              className={`w-1/2 font-medium py-3 border-r-[1px] border-action-normal ${
+                profile.gender === 0
+                  ? "text-base-primary bg-base-secondary-hover"
+                  : "text-base-secondary"
+              }`}
+              onClick={() => onSelectGender(0)}
+            >
+              남성
+            </button>
+            <button
+              className={`w-1/2 font-medium py-3 border-action-normal ${
+                profile.gender === 1
+                  ? "text-base-primary bg-base-secondary-hover"
+                  : "text-base-secondary"
+              }`}
+              onClick={() => onSelectGender(1)}
+            >
+              여성
+            </button>
+          </div>
+        </section>
+
+        <section className="mb-4">
+          <p className="text-sm font-medium mb-2 py-0.5">
+            국가 <span className="text-red-600">*</span>
+          </p>
+          <div className="`base-light border p-3 border-action-normal rounded-xl flex justify-between items-center text-sm overflow-hidden"></div>
         </section>
       </form>
     </>
