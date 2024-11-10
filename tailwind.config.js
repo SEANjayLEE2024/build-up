@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         "base-primary": "#14151A",
+        "base-primary-disable": "#E9EAEC",
         "base-tertiary": "#0D112666",
+        "base-quaternary": "#0A0F2940",
         "base-secondary": "rgba(15, 19, 36, 0.6)",
         "base-secondary-hover": "#F7F7F8",
         "base-inverted": "#0B0C0E",
