@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Title from "../../common/Title";
 import Checkbox from "./Checkbox";
+import Button from "../../common/Button";
+import FixedButtonLayout from "../../common/FixedButtonLayout";
 
-interface Props {
+interface PropsType {
   handleLoginStep: (step: number) => void;
 }
 interface CheckboxType {
@@ -11,7 +13,7 @@ interface CheckboxType {
   checked: boolean;
 }
 
-const TermsAgreement: React.FC<Props> = ({ handleLoginStep }) => {
+const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
   const [checkboxes, setCheckboxes] = useState<CheckboxType[]>([
     {
       id: "all",
@@ -93,13 +95,14 @@ const TermsAgreement: React.FC<Props> = ({ handleLoginStep }) => {
         </ul>
       </div>
 
-      <button
-        className="mt-auto"
-        onClick={() => handleLoginStep(1)}
-        disabled={!checkboxes[1].checked || !checkboxes[2].checked}
-      >
-        다음
-      </button>
+      <FixedButtonLayout>
+        <Button
+          buttonEvent={() => handleLoginStep(1)}
+          disable={!checkboxes[1].checked || !checkboxes[2].checked}
+        >
+          다음
+        </Button>
+      </FixedButtonLayout>
     </>
   );
 };

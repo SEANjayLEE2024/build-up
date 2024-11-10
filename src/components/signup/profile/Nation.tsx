@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { UserProfile } from "../../../models/signup.model";
+import { NationInfo } from "../../../models/signup.model";
 import SelectNationModal from "./SelectNationModal";
 
 interface PropsType {
   profile: UserProfile;
   setProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
+  nationList: NationInfo[];
 }
 
-const Nation: React.FC<PropsType> = ({ profile, setProfile }) => {
+const Nation: React.FC<PropsType> = ({ profile, setProfile, nationList }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const openModal = () => {
@@ -23,13 +25,27 @@ const Nation: React.FC<PropsType> = ({ profile, setProfile }) => {
         국가 <span className="text-red-600">*</span>
       </p>
       <div
-        className="`base-light border p-3 border-action-normal rounded-xl flex justify-between items-center text-sm overflow-hidden"
+        className="base-light border p-3 border-action-normal rounded-xl flex items-center text-sm overflow-hidden gap-1"
         onClick={openModal}
       >
-        {profile.nation}
+        <div className="w-5 h-5 rounded-full overflow-hidden">
+          <img
+            className="w-full h-full object-cover"
+            src={profile.nation.flag}
+            alt={profile.nation.name}
+          />
+        </div>
+        <span className="mx-1 font-medium">{profile.nation.name}</span>
       </div>
 
-      {modalOpen && <SelectNationModal closeModal={closeModal} />}
+      {modalOpen && (
+        <SelectNationModal
+          closeModal={closeModal}
+          profile={profile}
+          setProfile={setProfile}
+          nationList={nationList}
+        />
+      )}
     </section>
   );
 };
