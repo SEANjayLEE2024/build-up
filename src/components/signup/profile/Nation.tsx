@@ -26,7 +26,7 @@ const Nation: React.FC<PropsType> = ({ profile, setProfile, nationList }) => {
         국가 <span className="text-red-600">*</span>
       </p>
       <div
-        className="base-light border p-3 border-action-normal rounded-xl flex items-center text-sm overflow-hidden gap-1 relative"
+        className="shadow-base-light border p-3 border-action-normal rounded-xl flex items-center text-sm overflow-hidden gap-1 relative"
         onClick={openModal}
       >
         <div className="w-5 h-5 rounded-full overflow-hidden">

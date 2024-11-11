@@ -23,6 +23,9 @@ export default {
         "focus-gray": "0px 0px 0px 2px #BFC0C4",
         "focus-red": "0px 0px 0px 2px #FFB2B299",
       },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [],

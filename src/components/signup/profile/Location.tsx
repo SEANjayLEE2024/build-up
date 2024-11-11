@@ -29,7 +29,7 @@ const Location: React.FC<PropsType> = ({ profile, setProfile }) => {
         </div>
       )}
 
-      <div className="base-light border p-3 border-action-normal rounded-xl flex justify-center items-center text-sm overflow-hidden relative">
+      <div className="shadow-base-light border p-3 border-action-normal rounded-xl flex justify-center items-center text-sm overflow-hidden relative">
         <p className="mr-1">
           <img src={mapImage} alt="map-img" />
         </p>
