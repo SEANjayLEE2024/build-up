@@ -67,7 +67,7 @@ const SelectNationModal: React.FC<PropsType> = ({
 
         <div className="border-b-[1px] border-base-divider my-3 mx-0.5"></div>
 
-        <ul className="overflow-y-scroll h-full">
+        <ul className="overflow-y-scroll h-[calc(100%-180px)]">
           {nationList.map((nation) => (
             <li
               key={nation.name}
@@ -87,7 +87,7 @@ const SelectNationModal: React.FC<PropsType> = ({
         </ul>
 
         <FixedButtonLayout className={"absolute"}>
-          <Button>적용하기</Button>
+          <Button buttonEvent={closeModal}>적용하기</Button>
         </FixedButtonLayout>
       </div>
     </div>,
