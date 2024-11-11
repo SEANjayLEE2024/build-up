@@ -3,6 +3,8 @@ import RootLayout from "./pages/Root";
 import MainPage from "./pages/Main";
 import SignupPage from "./pages/Signup";
 import MyClubPage from "./pages/Myclub";
+import ClubFinder from "./pages/ClubFinder";
+import ClubCreation from "./pages/ClubCreation";
 import LoginPage from "./pages/Login";
 
 const router = createBrowserRouter([
@@ -15,6 +17,11 @@ const router = createBrowserRouter([
       { path: "login", element: <LoginPage /> },
       { path: "signup", element: <SignupPage /> },
       { path: "myclub", element: <MyClubPage /> },
+      {
+        path: "clubfinder",
+        element: <ClubFinder />,
+      },
+      { path: "clubfinder/createclub", element: <ClubCreation /> },
     ],
   },
 ]);
