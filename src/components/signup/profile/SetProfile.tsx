@@ -8,6 +8,8 @@ import Gender from "./Gender";
 import Nation from "./Nation";
 import FixedButtonLayout from "../../common/FixedButtonLayout";
 import Button from "../../common/Button";
+import Location from "./Location";
+import Ages from "./Ages";
 
 interface PropsType {
   handleLoginStep: (step: number) => void;
@@ -82,6 +84,8 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
         setProfile={setProfile}
         nationList={nationList}
       />
+      <Location profile={profile} setProfile={setProfile} />
+      <Ages />
 
       <FixedButtonLayout>
         <Button buttonEvent={() => handleLoginStep(2)}>다음</Button>
