@@ -85,10 +85,20 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
         nationList={nationList}
       />
       <Location profile={profile} setProfile={setProfile} />
-      <Ages />
+      <Ages profile={profile} setProfile={setProfile} />
 
       <FixedButtonLayout>
-        <Button buttonEvent={() => handleLoginStep(2)}>다음</Button>
+        <Button
+          disable={
+            !profile.nickname ||
+            profile.gender === null ||
+            !profile.nation.name ||
+            !profile.age
+          }
+          buttonEvent={() => handleLoginStep(2)}
+        >
+          다음
+        </Button>
       </FixedButtonLayout>
     </div>
   );

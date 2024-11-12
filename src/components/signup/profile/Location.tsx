@@ -1,7 +1,9 @@
 import locationImage from "../../../assets/images/locate.png";
 import checkImage from "../../../assets/images/check.png";
 import mapImage from "../../../assets/images/map.png";
+import Map from "./Map";
 import { UserProfile } from "../../../models/signup.model";
+import { useState } from "react";
 
 interface PropsType {
   profile: UserProfile;
@@ -9,6 +11,12 @@ interface PropsType {
 }
 
 const Location: React.FC<PropsType> = ({ profile, setProfile }) => {
+  const [openMap, setOpenMap] = useState<boolean>(false);
+
+  const mapHandler = async () => {
+    setOpenMap(true);
+  };
+
   return (
     <section className="mb-4">
       <p className="text-sm font-medium mb-2 py-0.5">
@@ -29,12 +37,17 @@ const Location: React.FC<PropsType> = ({ profile, setProfile }) => {
         </div>
       )}
 
-      <div className="shadow-base-light border p-3 border-action-normal rounded-xl flex justify-center items-center text-sm overflow-hidden relative">
+      <div
+        className="shadow-base-light border p-3 border-action-normal rounded-xl flex justify-center items-center text-sm overflow-hidden relative"
+        onClick={mapHandler}
+      >
         <p className="mr-1">
           <img src={mapImage} alt="map-img" />
         </p>
         <span className="px-1 text-sm font-medium">내 동네 설정하기</span>
       </div>
+
+      {openMap && <Map />}
     </section>
   );
 };
