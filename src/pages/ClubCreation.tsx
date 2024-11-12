@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import NameInput from "../components/clubcreation/NameInput";
 import PriceInput from "../components/clubcreation/PriceInput";
@@ -62,7 +62,10 @@ export default function ClubCreation() {
           clubCreationInputs={clubCreationInputs}
           setClubCreationInputs={setClubCreationInputs}
         />
-        <LocationInput />
+        <LocationInput
+          clubCreationInputs={clubCreationInputs}
+          setClubCreationInputs={setClubCreationInputs}
+        />
         <AgeInput register={register} />
         <GenderInput register={register} />
         <FrequentMatchTimeInput register={register} />
