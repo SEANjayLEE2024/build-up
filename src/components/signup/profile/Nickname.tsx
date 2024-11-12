@@ -63,7 +63,7 @@ const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
       </p>
       <div>
         <div
-          className={`base-light border rounded-xl p-3 flex justify-between items-center gap-1 text-sm ${
+          className={`shadow-base-light border rounded-xl p-3 flex justify-between items-center gap-1 text-sm ${
             !nicknameErrorText
               ? "border-action-normal focus-within:border-base-inverted focus-within:shadow-focus-gray"
               : "border-focus-destructive-light focus-within:shadow-focus-red"

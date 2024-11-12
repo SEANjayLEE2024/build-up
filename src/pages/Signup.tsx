@@ -10,9 +10,9 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="pt-10 h-screen flex flex-col justify-between">
+    <div className="pt-10 h-screen">
       {step === 1 && <TermsAgreement handleLoginStep={nextStep} />}
-      {step === 2 && <SetProfile />}
+      {step === 2 && <SetProfile handleLoginStep={nextStep} />}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Gender: React.FC<PropsType> = ({ profile, setProfile }) => {
       <p className="text-sm font-medium mb-2 py-0.5">
         성별 <span className="text-red-600">*</span>
       </p>
-      <div className="`base-light border border-action-normal rounded-xl flex justify-between items-center text-sm overflow-hidden">
+      <div className="shadow-base-light border border-action-normal rounded-xl flex justify-between items-center text-sm overflow-hidden">
         <button
           className={`w-1/2 font-medium py-3 border-r-[1px] border-action-normal ${
             profile.gender === 0
