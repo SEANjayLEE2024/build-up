@@ -10,7 +10,7 @@
     letter-spacing: -0.018rem;
   }
   .age-select-button {
-    @apply shadow-base-light py-3 text-sm font-medium text-base-secondary border-t border-r border-action-normal;
+    @apply shadow-base-light py-3 text-sm font-medium border-t border-r border-action-normal;
   }
 }
 
