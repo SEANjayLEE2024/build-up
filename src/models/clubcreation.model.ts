@@ -16,3 +16,12 @@ export type Inputs = {
 export type ClubFormProps = {
   register: UseFormRegister<Inputs>;
 };
+
+export interface ClubCreationInputStateI {
+  imgPreview: string;
+  clubName: string;
+  clubNameError: string;
+  clubFee: string;
+  clubFeeError: string;
+  clubLocation: string;
+}

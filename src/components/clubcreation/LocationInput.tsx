@@ -33,13 +33,10 @@ export default function LocationInput() {
         clickedRegionLocation.result.featureCollection.features;
       setRegionLocationArray(clickedRegionLocationArray);
     };
-
+    // 클릭된 광역시도의 시군구 정보(배열)를 받아옴
     getClickedRegionLocation();
-    // backend에서 요청할 수 있게 수정해야함
-    // 여기서 cors 에러 발생
   }, [region]);
 
-  console.log(regionLocationsArray);
   if (region && regionLocationsArray.length !== 0) {
     //여기서 set
   }
@@ -66,4 +63,3 @@ export default function LocationInput() {
     </div>
   );
 }
-// {!region && !regionLocationsArray && }
