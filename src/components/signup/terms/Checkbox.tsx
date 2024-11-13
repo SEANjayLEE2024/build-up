@@ -1,18 +1,20 @@
 import { ReactNode } from "react";
 
-interface Props {
+interface PropsType {
   children: ReactNode;
   id: string;
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC<Props> = ({ children, id, checked, onChange }) => {
+const Checkbox: React.FC<PropsType> = ({ children, id, checked, onChange }) => {
   const classes =
     id === "all" ? "border border-action-normal py-4 rounded-2xl" : "";
 
   return (
-    <div className={`flex justify-between mb-4 px-5 ${classes}`}>
+    <div
+      className={`flex justify-between mb-4 px-5 max-[360px]:px-3 ${classes}`}
+    >
       <div className="flex items-center">
         <input
           type="checkbox"
@@ -27,7 +29,7 @@ const Checkbox: React.FC<Props> = ({ children, id, checked, onChange }) => {
             aria-hidden="true"
           ></span>
           <label
-            className="relative pl-7 cursor-pointer text-sm font-medium base-primary"
+            className="relative pl-7 cursor-pointer text-sm max-[359px]:text-xs font-medium base-primary"
             htmlFor={id}
           >
             {children}

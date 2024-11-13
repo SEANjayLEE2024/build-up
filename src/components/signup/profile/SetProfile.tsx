@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { UserProfile } from "../../../models/signup.model";
+import {
+  UserProfile,
+  NationInfo,
+  NationAPI,
+} from "../../../models/signup.model";
 import { httpClient } from "../../../api/http";
-import { NationInfo } from "../../../models/signup.model";
 import Title from "../../common/Title";
 import Nickname from "./Nickname";
 import Gender from "./Gender";
@@ -13,14 +16,6 @@ import Ages from "./Ages";
 
 interface PropsType {
   handleLoginStep: (step: number) => void;
-}
-interface ApiNation {
-  name: {
-    common: string;
-  };
-  flags: {
-    svg: string;
-  };
 }
 
 const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
@@ -38,9 +33,8 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
 
   const getNations = async () => {
     try {
-      /* 무료 국가명, 국기img api */
       const response = await httpClient("https://restcountries.com/v3.1/all");
-      const data: ApiNation[] = response.data;
+      const data: NationAPI[] = response.data;
       console.log(data);
 
       const nationsData = data.map((nation) => ({

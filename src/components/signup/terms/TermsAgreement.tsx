@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CheckboxType } from "../../../models/signup.model";
 import Title from "../../common/Title";
 import Checkbox from "./Checkbox";
 import Button from "../../common/Button";
@@ -6,11 +7,6 @@ import FixedButtonLayout from "../../common/FixedButtonLayout";
 
 interface PropsType {
   handleLoginStep: (step: number) => void;
-}
-interface CheckboxType {
-  id: string;
-  text: string;
-  checked: boolean;
 }
 
 const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
