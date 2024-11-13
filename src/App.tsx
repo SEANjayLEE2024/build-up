@@ -6,11 +6,13 @@ import MyClubPage from "./pages/Myclub";
 import ClubFinder from "./pages/ClubFinder";
 import ClubCreation from "./pages/ClubCreation";
 import LoginPage from "./pages/Login";
+import ErrorPage from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     id: "root",
     children: [
       { index: true, element: <MainPage /> },
