@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Regions } from "../../utils/constants/Region";
 import { fetchRegionLocation } from "../../api/clubcreation.api";
+import { ClubCreationInputStateI } from "../../models/clubcreation.model";
 
 interface RegionLocationProps {
   type: "Feature";
@@ -13,17 +14,37 @@ interface RegionLocationProps {
   id: string;
 }
 
-export default function LocationInput() {
+interface Props {
+  clubCreationInputs: ClubCreationInputStateI;
+  setClubCreationInputs: React.Dispatch<
+    React.SetStateAction<ClubCreationInputStateI>
+  >;
+}
+
+export default function LocationInput({
+  clubCreationInputs,
+  setClubCreationInputs,
+}: Props) {
   const [region, setRegion] = useState("");
-  // 광역시도
   const [regionLocationsArray, setRegionLocationArray] = useState<
     RegionLocationProps[]
   >([]);
-  // 시군구
+  const [location, setLocation] = useState("");
+  // 광역시도 -> region
+  // 시군도 -> regionLocationsArray
 
   const onClickRegionButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     const currentRegion = event.currentTarget.value;
+    console.log(currentRegion);
     setRegion(currentRegion);
+  };
+
+  const onClickLocationButton = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    const currentLocation = event.currentTarget.value;
+    setLocation(currentLocation);
   };
 
   useEffect(() => {
@@ -33,16 +54,25 @@ export default function LocationInput() {
         clickedRegionLocation.result.featureCollection.features;
       setRegionLocationArray(clickedRegionLocationArray);
     };
-
+    // 클릭된 광역시도의 시군구 정보(배열)를 받아옴
     getClickedRegionLocation();
-    // backend에서 요청할 수 있게 수정해야함
-    // 여기서 cors 에러 발생
   }, [region]);
 
-  console.log(regionLocationsArray);
-  if (region && regionLocationsArray.length !== 0) {
-    //여기서 set
-  }
+  useEffect(() => {
+    if (region && location) {
+      setClubCreationInputs((prev) => ({
+        ...prev,
+        clubLocation: `${location}`,
+      }));
+    }
+  }, [location]);
+
+  const resetLocation = () => {
+    setClubCreationInputs((prev) => ({ ...prev, clubLocation: "" }));
+    setLocation("");
+    setRegion("");
+    setRegionLocationArray([]);
+  };
 
   return (
     <div>
@@ -52,18 +82,30 @@ export default function LocationInput() {
             key={i}
             onClick={onClickRegionButton}
             value={region.regionValue}
+            type="button"
           >
             {region.regionName}
           </button>
         ))}
-      {region && regionLocationsArray.length !== 0 && (
+      {region && regionLocationsArray.length !== 0 && !location && (
         <div className="flex flex-col ">
           {regionLocationsArray.map((location) => (
-            <button>{location.properties.sig_kor_nm}</button>
+            <button
+              value={location.properties.full_nm}
+              type="button"
+              onClick={onClickLocationButton}
+            >
+              {location.properties.sig_kor_nm}
+            </button>
           ))}
+        </div>
+      )}
+      {region && location && (
+        <div className="flex flex-col">
+          <span>{clubCreationInputs.clubLocation}</span>
+          <button onClick={resetLocation}>다시</button>
         </div>
       )}
     </div>
   );
 }
-// {!region && !regionLocationsArray && }

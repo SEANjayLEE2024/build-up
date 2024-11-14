@@ -1,9 +1,33 @@
+import React from "react";
+import { ClubCreationInputStateI } from "../../models/clubcreation.model";
+import { validationClubName } from "../../utils/validation/CreateClub";
+
 interface Props {
-  clubNameError: string;
-  onChangeClubName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  clubCreationInputs: ClubCreationInputStateI;
+  setClubCreationInputs: React.Dispatch<
+    React.SetStateAction<ClubCreationInputStateI>
+  >;
 }
 
-export default function NameInput({ clubNameError, onChangeClubName }: Props) {
+export default function NameInput({
+  clubCreationInputs,
+  setClubCreationInputs,
+}: Props) {
+  const onChangeClubName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clubNameCurrent = event.target.value;
+
+    if (validationClubName(clubNameCurrent)) {
+      setClubCreationInputs((prev) => ({ ...prev, clubName: clubNameCurrent }));
+      setClubCreationInputs((prev) => ({ ...prev, clubNameError: "" }));
+    } else if (!validationClubName(clubNameCurrent)) {
+      setClubCreationInputs((prev) => ({ ...prev, clubName: "" }));
+      setClubCreationInputs((prev) => ({
+        ...prev,
+        clubNameError: "10글자 이내의 한글, 영어, 숫자만 사용가능합니다.",
+      }));
+    }
+  };
+
   return (
     <>
       <label className="mt-10"></label>
@@ -13,7 +37,9 @@ export default function NameInput({ clubNameError, onChangeClubName }: Props) {
         onChange={onChangeClubName}
         placeholder="클럽 이름을 입력해주세요."
       />
-      {clubNameError && <span>{clubNameError}</span>}
+      {clubCreationInputs.clubNameError && (
+        <span>{clubCreationInputs.clubNameError}</span>
+      )}
       <span className="text-xs">
         특수문자 제외 영어, 한글, 숫자만 사용가능합니다.
       </span>

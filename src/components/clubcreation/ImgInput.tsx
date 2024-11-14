@@ -15,7 +15,7 @@ export default function ImgInput({ register, imgPreview }: Props) {
         className="p-2"
         type="file"
         accept="image/*"
-        {...register("club_img", { required: "필수 선택값입니다." })}
+        {...register("clubImg", { required: "필수 선택값입니다." })}
       />
     </>
   );
