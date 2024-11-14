@@ -3,7 +3,7 @@ import { httpClient } from "./http";
 export const fetchRegionLocation = async (region: string) => {
   const response = await httpClient.get(`/regionlocation/${region}`);
   const { regionLocation } = response.data;
-  console.log(regionLocation);
+
   return regionLocation.response;
 
   /*

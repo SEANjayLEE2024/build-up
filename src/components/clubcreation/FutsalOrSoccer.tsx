@@ -7,7 +7,9 @@ export default function FusalOrSoccer({ register }: ClubFormProps) {
       <select
         className="p-2"
         defaultValue={"풋살"}
-        {...register("futsal_or_soccer", { required: "필수 선택값입니다." })}
+        {...register("clubFutsalOrSoccer", {
+          required: "필수 선택값입니다.",
+        })}
       >
         <option value="풋살">풋살</option>
         <option value="축구">축구</option>

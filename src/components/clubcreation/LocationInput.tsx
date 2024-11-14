@@ -42,7 +42,7 @@ export default function LocationInput({
   const onClickLocationButton = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.dir(event.currentTarget);
+    event.preventDefault();
     const currentLocation = event.currentTarget.value;
     setLocation(currentLocation);
   };
@@ -82,6 +82,7 @@ export default function LocationInput({
             key={i}
             onClick={onClickRegionButton}
             value={region.regionValue}
+            type="button"
           >
             {region.regionName}
           </button>

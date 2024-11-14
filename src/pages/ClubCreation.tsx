@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import NameInput from "../components/clubcreation/NameInput";
 import PriceInput from "../components/clubcreation/PriceInput";
-import { ClubCreationInputStateI, Inputs } from "../models/clubcreation.model";
+import {
+  ClubCreationInputHookI,
+  ClubCreationInputStateI,
+} from "../models/clubcreation.model";
 import FusalOrSoccer from "../components/clubcreation/FutsalOrSoccer";
 import ImgInput from "../components/clubcreation/ImgInput";
 import LocationInput from "../components/clubcreation/LocationInput";
@@ -21,6 +24,10 @@ export default function ClubCreation() {
       clubFee: "0",
       clubFeeError: "",
       clubLocation: "",
+      clubRecruitment: {
+        futsal: [],
+        soccer: [],
+      },
     });
 
   const {
@@ -28,13 +35,13 @@ export default function ClubCreation() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  } = useForm<ClubCreationInputHookI>();
+  const onSubmit: SubmitHandler<ClubCreationInputHookI> = (data) => {
     console.log(data);
     console.log("제출됨");
   };
 
-  const imgFiles = watch("club_img");
+  const imgFiles = watch("clubImg");
 
   useEffect(() => {
     if (imgFiles && imgFiles.length > 0) {
@@ -58,6 +65,7 @@ export default function ClubCreation() {
           register={register}
           imgPreview={clubCreationInputs.imgPreview}
         />
+
         <NameInput
           clubCreationInputs={clubCreationInputs}
           setClubCreationInputs={setClubCreationInputs}
@@ -74,7 +82,10 @@ export default function ClubCreation() {
           setClubCreationInputs={setClubCreationInputs}
         />
         <TeamTaticsInput register={register} />
-        <PreferredPosition register={register} />
+        <PreferredPosition
+          clubCreationInputs={clubCreationInputs}
+          setClubCreationInputs={setClubCreationInputs}
+        />
         <button type="submit">생성 완료</button>
       </form>
     </div>

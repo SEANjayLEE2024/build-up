@@ -35,8 +35,8 @@ export default function PreferredPosition({
       ...current,
       clubRecruitment: {
         ...current.clubRecruitment,
-        footsal: [
-          ...new Set([...current.clubRecruitment.footsal, preferredPosition]),
+        futsal: [
+          ...new Set([...current.clubRecruitment.futsal, preferredPosition]),
         ],
       },
     }));
@@ -62,14 +62,14 @@ export default function PreferredPosition({
   ) => {
     const notPreferredPosition = e.currentTarget.value;
     const notPreferredPositionIndex =
-      clubCreationInputs.clubRecruitment.footsal.indexOf(notPreferredPosition);
-    const newFutsalPosition = [...clubCreationInputs.clubRecruitment.footsal];
+      clubCreationInputs.clubRecruitment.futsal.indexOf(notPreferredPosition);
+    const newFutsalPosition = [...clubCreationInputs.clubRecruitment.futsal];
     newFutsalPosition.splice(notPreferredPositionIndex, 1);
     setClubCreationInputs((current) => ({
       ...current,
       clubRecruitment: {
         ...current.clubRecruitment,
-        footsal: newFutsalPosition,
+        futsal: newFutsalPosition,
       },
     }));
   };
@@ -92,7 +92,7 @@ export default function PreferredPosition({
   };
 
   const checkFutsalPreferred = (position: string) => {
-    if (clubCreationInputs.clubRecruitment.footsal.includes(position)) {
+    if (clubCreationInputs.clubRecruitment.futsal.includes(position)) {
       return true;
     }
     return false;

@@ -25,6 +25,7 @@ export default function PriceInput({
         ...prev,
         clubFeeError: "숫자만 사용가능합니다.",
       }));
+
       if (clubFeeCurrent === "") {
         setClubCreationInputs((prev) => ({ ...prev, clubFee: "0" }));
         setClubCreationInputs((prev) => ({ ...prev, clubFeeError: `` }));
