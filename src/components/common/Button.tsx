@@ -14,7 +14,7 @@ const Button: React.FC<PropsType> = ({
   return (
     <button
       className={`w-full py-3 rounded-xl ${
-        disable ? "bg-base-primary-disable" : "bg-base-primary"
+        disable ? "bg-semantic-disable" : "bg-semantic-positive"
       }`}
       onClick={buttonEvent}
       disabled={disable}
