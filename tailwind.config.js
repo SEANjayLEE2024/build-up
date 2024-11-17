@@ -28,6 +28,9 @@ export default {
       borderWidth: {
         1: "1px",
       },
+      backgroundImage: {
+        splash: "url(/src/assets/images/splash-img.png)",
+      },
     },
   },
   plugins: [],
