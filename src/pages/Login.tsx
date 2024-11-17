@@ -16,7 +16,7 @@ const LoginPage = () => {
             아마추어도 제대로 즐기고 싶으니까
           </span>
         </div>
-        <FixedButtonLayout className="bg-transparent">
+        <FixedButtonLayout className={"bg-transparent"}>
           <GoogleLoginButton />
         </FixedButtonLayout>
       </div>

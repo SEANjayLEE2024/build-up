@@ -11,7 +11,9 @@ const FixedButtonLayout: React.FC<PropsType> = ({
 }) => {
   return (
     <div
-      className={`fixed left-0 bottom-0 right-0 px-6 py-2.5 bg-white ${className}`}
+      className={`fixed left-0 bottom-0 right-0 px-6 py-2.5  ${
+        className ? className : "bg-white"
+      }`}
     >
       {children}
     </div>
