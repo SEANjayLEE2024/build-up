@@ -87,7 +87,9 @@ const SelectNationModal: React.FC<PropsType> = ({
         </ul>
 
         <FixedButtonLayout className={"absolute"}>
-          <Button buttonEvent={closeModal}>적용하기</Button>
+          <Button className="text-white" buttonEvent={closeModal}>
+            적용하기
+          </Button>
         </FixedButtonLayout>
       </div>
     </div>,

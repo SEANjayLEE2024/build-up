@@ -93,6 +93,7 @@ const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
 
       <FixedButtonLayout>
         <Button
+          className="text-white"
           buttonEvent={() => handleLoginStep(1)}
           disable={!checkboxes[1].checked || !checkboxes[2].checked}
         >

@@ -63,6 +63,10 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
     }
   };
 
+  const onSignUp = () => {
+    httpClient.post("/members", {});
+  };
+
   useEffect(() => {
     getNations();
   }, []);
@@ -83,13 +87,14 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
 
       <FixedButtonLayout>
         <Button
+          className="text-white"
           disable={
             !profile.nickname ||
             profile.gender === null ||
             !profile.nation.name ||
             !profile.age
           }
-          buttonEvent={() => handleLoginStep(2)}
+          buttonEvent={onSignUp}
         >
           다음
         </Button>
