@@ -18,7 +18,7 @@ interface PropsType {
   handleLoginStep: (step: number) => void;
 }
 
-const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
+const SetUser: React.FC<PropsType> = ({ handleLoginStep }) => {
   const [profile, setProfile] = useState<UserProfile>({
     nickname: "",
     gender: null,
@@ -63,10 +63,6 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
     }
   };
 
-  const onSignUp = () => {
-    httpClient.post("/members", {});
-  };
-
   useEffect(() => {
     getNations();
   }, []);
@@ -94,7 +90,7 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
             !profile.nation.name ||
             !profile.age
           }
-          buttonEvent={onSignUp}
+          buttonEvent={() => handleLoginStep(2)}
         >
           다음
         </Button>
@@ -103,4 +99,4 @@ const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
   );
 };
 
-export default SetProfile;
+export default SetUser;
