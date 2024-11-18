@@ -1,106 +1,65 @@
-import { useState, useEffect } from "react";
-import { UserProfile } from "../../../models/signup.model";
-import { httpClient } from "../../../api/http";
-import { NationInfo } from "../../../models/signup.model";
 import Title from "../../common/Title";
-import Nickname from "./Nickname";
-import Gender from "./Gender";
-import Nation from "./Nation";
+import targetImg from "../../../assets/images/target.png";
+import SetFootBallPosition from "./SetFootBallPosition";
+import { PlayerProfile } from "../../../models/signup.model";
+import { useState } from "react";
+import SetSoccerPosition from "./SetSoccerPosition";
+import SetCareer from "./SetCareer";
+import SetStrongFoot from "./SetStrongFoot";
+import SetFavoriteClub from "./SetFavoriteClub";
 import FixedButtonLayout from "../../common/FixedButtonLayout";
 import Button from "../../common/Button";
-import Location from "./Location";
-import Ages from "./Ages";
 
-interface PropsType {
-  handleLoginStep: (step: number) => void;
-}
-interface ApiNation {
-  name: {
-    common: string;
-  };
-  flags: {
-    svg: string;
-  };
-}
-
-const SetProfile: React.FC<PropsType> = ({ handleLoginStep }) => {
-  const [profile, setProfile] = useState<UserProfile>({
-    nickname: "",
-    gender: null,
-    nation: {
-      name: "South Korea",
-      flag: "",
-    },
-    location: "",
-    age: "",
+const SetProfile = () => {
+  const [profile, setProfile] = useState<PlayerProfile>({
+    footballPosition: [],
+    soccerPosition: [],
+    career: null,
+    strongFoot: null,
+    favoriteClub: null,
   });
-  const [nationList, setNationList] = useState<NationInfo[]>([]);
 
-  const getNations = async () => {
-    try {
-      /* 무료 국가명, 국기img api */
-      const response = await httpClient("https://restcountries.com/v3.1/all");
-      const data: ApiNation[] = response.data;
-      console.log(data);
-
-      const nationsData = data.map((nation) => ({
-        name: nation.name.common,
-        flag: nation.flags.svg,
-      }));
-
-      const sortedData = nationsData.sort((a, b) => {
-        if (a.name === "South Korea") return -1;
-        if (b.name === "South Korea") return 1;
-        return a.name.localeCompare(b.name);
-      });
-
-      setNationList(sortedData);
-      if (sortedData.length > 0) {
-        setProfile((prev) => ({
-          ...prev,
-          nation: {
-            name: sortedData[0].name,
-            flag: sortedData[0].flag,
-          },
-        }));
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const createProfile = () => {
+    console.log("완성");
   };
-
-  useEffect(() => {
-    getNations();
-  }, []);
 
   return (
-    <div>
-      <Title>빌드업 정보 입력하기</Title>
+    <>
+      <Title>
+        <div className="flex justify-between items-center">
+          <div>
+            <p>선수 프로필 만들기</p>
+            <span className="text-sm text-base-secondary font-normal">
+              나만의 축구 프로필을 만들어봐요!
+            </span>
+          </div>
+          <div>
+            <img src={targetImg} alt="target" />
+          </div>
+        </div>
+      </Title>
 
-      <Nickname profile={profile} setProfile={setProfile} />
-      <Gender profile={profile} setProfile={setProfile} />
-      <Nation
-        profile={profile}
-        setProfile={setProfile}
-        nationList={nationList}
-      />
-      <Location profile={profile} setProfile={setProfile} />
-      <Ages profile={profile} setProfile={setProfile} />
+      <SetFootBallPosition profile={profile} setProfile={setProfile} />
+      <SetSoccerPosition profile={profile} setProfile={setProfile} />
+      <SetCareer profile={profile} setProfile={setProfile} />
+      <SetStrongFoot profile={profile} setProfile={setProfile} />
+      <SetFavoriteClub />
 
       <FixedButtonLayout>
         <Button
+          className="text-white"
           disable={
-            !profile.nickname ||
-            profile.gender === null ||
-            !profile.nation.name ||
-            !profile.age
+            profile.footballPosition.length === 0 ||
+            profile.soccerPosition.length === 0 ||
+            profile.career === null ||
+            profile.strongFoot === null
           }
-          buttonEvent={() => handleLoginStep(2)}
+          buttonEvent={createProfile}
         >
-          다음
+          프로필 완성하기
         </Button>
       </FixedButtonLayout>
-    </div>
+    </>
   );
 };
 

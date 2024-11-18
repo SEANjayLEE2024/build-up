@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CheckboxType } from "../../../models/signup.model";
 import Title from "../../common/Title";
 import Checkbox from "./Checkbox";
 import Button from "../../common/Button";
@@ -7,17 +8,12 @@ import FixedButtonLayout from "../../common/FixedButtonLayout";
 interface PropsType {
   handleLoginStep: (step: number) => void;
 }
-interface CheckboxType {
-  id: string;
-  text: string;
-  checked: boolean;
-}
 
 const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
   const [checkboxes, setCheckboxes] = useState<CheckboxType[]>([
     {
       id: "all",
-      text: "다음 항목에 모두동의",
+      text: "전체동의 (선택항목 포함)",
       checked: false,
     },
     {
@@ -97,6 +93,7 @@ const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
 
       <FixedButtonLayout>
         <Button
+          className="text-white"
           buttonEvent={() => handleLoginStep(1)}
           disable={!checkboxes[1].checked || !checkboxes[2].checked}
         >

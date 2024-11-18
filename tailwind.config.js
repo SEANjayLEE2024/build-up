@@ -5,6 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        "semantic-positive": "#40D986",
+        "semantic-disable": "#26BD6C4D",
         "base-primary": "#14151A",
         "base-primary-disable": "#E9EAEC",
         "base-tertiary": "#0D112666",
@@ -25,6 +27,9 @@ export default {
       },
       borderWidth: {
         1: "1px",
+      },
+      backgroundImage: {
+        splash: "url(/src/assets/images/splash-img.png)",
       },
     },
   },

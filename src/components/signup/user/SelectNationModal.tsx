@@ -7,23 +7,23 @@ import Button from "../../common/Button";
 
 interface PropsType {
   closeModal: () => void;
-  profile: UserProfile;
-  setProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
+  userInfo: UserProfile;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserProfile>>;
   nationList: NationInfo[];
 }
 
 const SelectNationModal: React.FC<PropsType> = ({
   closeModal,
-  setProfile,
   nationList,
-  profile,
+  setUserInfo,
+  userInfo,
 }) => {
   const stopEventPropagation = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
 
   const selectNation = (nation: NationInfo) => {
-    setProfile((prev) => ({
+    setUserInfo((prev) => ({
       ...prev,
       nation,
     }));
@@ -52,12 +52,12 @@ const SelectNationModal: React.FC<PropsType> = ({
             <div className="w-5 h-5 rounded-full overflow-hidden">
               <img
                 className="w-full h-full object-cover"
-                src={profile.nation.flag}
+                src={userInfo.nation.flag}
                 alt=""
               />
             </div>
             <span className="flex-1 font-semibold text-base-primary">
-              {profile.nation.name}
+              {userInfo.nation.name}
             </span>
             <button className="">
               <img src={checkImg} alt="check" />
@@ -87,7 +87,9 @@ const SelectNationModal: React.FC<PropsType> = ({
         </ul>
 
         <FixedButtonLayout className={"absolute"}>
-          <Button buttonEvent={closeModal}>적용하기</Button>
+          <Button className="text-white" buttonEvent={closeModal}>
+            적용하기
+          </Button>
         </FixedButtonLayout>
       </div>
     </div>,

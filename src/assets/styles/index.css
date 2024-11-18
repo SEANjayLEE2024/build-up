@@ -25,8 +25,8 @@ body {
 }
 
 [type="checkbox"]:checked + .label-box .check-icon {
-  border-color: black;
-  background-color: black;
+  border-color: #40d986;
+  background-color: #40d986;
 }
 [type="checkbox"]:checked + .label-box .check-icon::before {
   border-color: #fff;

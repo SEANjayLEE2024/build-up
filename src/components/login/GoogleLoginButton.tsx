@@ -1,52 +1,74 @@
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { httpClient } from "../../api/http";
+import Button from "../common/Button";
+import googleImg from "../../assets/images/google-icon.png";
 
-const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
-interface CredentialResponse {
-  credential?: string;
+interface CodeResponse {
+  code: string;
+  state?: string;
 }
 
 const GoogleLoginButton = () => {
   const navigate = useNavigate();
 
-  const onSuccessGoogleLogin = async (
-    credentialResponse: CredentialResponse
-  ) => {
-    /* 임시 */
-    try {
-      const response = await httpClient.post("unknown", {
-        token: credentialResponse.credential,
-      });
-      const data = response.data;
+  const login = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (
+      credentialResponse: Omit<
+        CodeResponse,
+        "error" | "error_description" | "error_uri"
+      >
+    ) => {
+      console.log("credentialResponse", credentialResponse);
+      const { code } = credentialResponse;
 
-      if (data.isNewUser) {
+      if (code) {
+        try {
+          const response = await httpClient.post("/", {
+            code,
+          });
+          const { access_token, isNewUser } = response.data;
+
+          if (access_token) {
+            onSuccessGoogleLogin(access_token, isNewUser);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    onError: () => {
+      onErrorGoogleLogin();
+    },
+  });
+
+  const onSuccessGoogleLogin = async (token: string, isNewUser: boolean) => {
+    if (token) {
+      localStorage.setItem("access_token", token);
+      if (isNewUser) {
         navigate("/signup");
       } else {
         navigate("/");
       }
-    } catch (error) {
-      /* 에러처리 생각중 */
-      console.log(error);
     }
   };
 
   const onErrorGoogleLogin = (error: void) => {
+    console.log("에러");
     console.log(error);
   };
 
   return (
-    <>
-      {CLIENT_ID && (
-        <GoogleOAuthProvider clientId={CLIENT_ID}>
-          <GoogleLogin
-            onSuccess={onSuccessGoogleLogin}
-            onError={onErrorGoogleLogin}
-          ></GoogleLogin>
-        </GoogleOAuthProvider>
-      )}
-    </>
+    <Button
+      buttonEvent={login}
+      className={
+        "bg-white text-base-primary flex justify-center items-center font-semibold text-lg"
+      }
+    >
+      <img className="mr-1" src={googleImg} alt="google" />
+      구글로 시작하기
+    </Button>
   );
 };
 

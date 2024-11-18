@@ -5,7 +5,9 @@ interface props {
 }
 
 const Title: React.FC<props> = ({ children }) => {
-  return <p className="font-bold text-2xl pb-8 tracking-custom">{children}</p>;
+  return (
+    <div className="font-bold text-2xl pb-8 tracking-custom">{children}</div>
+  );
 };
 
 export default Title;
