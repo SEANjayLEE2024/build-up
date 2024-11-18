@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { UserProfile } from "../../../models/signup.model";
+import InputLayout from "../../common/InputLayout";
 
 const NICKNAME_MAX_LENGTH = 20;
 const NICKNAME_ALLOW_PATTERN = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;
 
 interface PropsType {
-  profile: UserProfile;
-  setProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
+  userInfo: UserProfile;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserProfile>>;
 }
 
-const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
+const Nickname: React.FC<PropsType> = ({ userInfo, setUserInfo }) => {
   const [nicknameErrorText, setNicknameErrorText] = useState<string | null>(
     null
   );
@@ -27,7 +28,7 @@ const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
   const onChangeNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setProfile((prev) => ({ ...prev, nickname: value }));
+    setUserInfo((prev) => ({ ...prev, nickname: value }));
 
     if (value === "") {
       setNicknameErrorText(null);
@@ -57,10 +58,7 @@ const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
     }
   };
   return (
-    <section className="mb-4">
-      <p className="text-sm font-medium mb-2 py-0.5">
-        닉네임 <span className="text-red-600">*</span>
-      </p>
+    <InputLayout title="닉네임">
       <div>
         <div
           className={`shadow-base-light border rounded-xl p-3 flex justify-between items-center gap-1 text-sm ${
@@ -79,7 +77,7 @@ const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
             onBlur={onBlurNickname}
           />
           <p className="text-base-tertiary">
-            <span>{profile.nickname.length}</span>/
+            <span>{userInfo.nickname.length}</span>/
             <span>{NICKNAME_MAX_LENGTH}</span>
           </p>
         </div>
@@ -109,7 +107,7 @@ const Nickname: React.FC<PropsType> = ({ profile, setProfile }) => {
             : nicknameErrorText}
         </p>
       </div>
-    </section>
+    </InputLayout>
   );
 };
 

@@ -1,11 +1,12 @@
 import { UserProfile } from "../../../models/signup.model";
+import InputLayout from "../../common/InputLayout";
 
 interface PropsType {
-  profile: UserProfile;
-  setProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
+  userInfo: UserProfile;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserProfile>>;
 }
 
-const ages = [
+const AGES = [
   { label: "10대", className: "border-l rounded-tl-xl" },
   { label: "20대", className: "" },
   { label: "30대", className: "rounded-tr-xl" },
@@ -18,26 +19,22 @@ const ages = [
   },
 ];
 
-const Ages: React.FC<PropsType> = ({ profile, setProfile }) => {
+const Ages: React.FC<PropsType> = ({ userInfo, setUserInfo }) => {
   const selectAge = (index: number) => {
-    setProfile((prev) => ({
+    setUserInfo((prev) => ({
       ...prev,
-      age: ages[index].label,
+      age: AGES[index].label,
     }));
   };
 
   return (
-    <section className="mb-4">
-      <p className="text-sm font-medium mb-2 py-0.5">
-        연령대 <span className="text-red-600">*</span>
-      </p>
-
+    <InputLayout title="연령대">
       <div className="grid grid-cols-3">
-        {ages.map((age, index) => (
+        {AGES.map((age, index) => (
           <button
             key={age.label}
             className={`age-select-button ${age.className} ${
-              profile.age === age.label
+              userInfo.age === age.label
                 ? "bg-base-secondary-hover text-base-primary"
                 : "text-base-secondary"
             }`}
@@ -47,7 +44,7 @@ const Ages: React.FC<PropsType> = ({ profile, setProfile }) => {
           </button>
         ))}
       </div>
-    </section>
+    </InputLayout>
   );
 };
 

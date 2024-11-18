@@ -19,11 +19,11 @@ interface PropsType {
 }
 
 const SetUser: React.FC<PropsType> = ({ handleLoginStep }) => {
-  const [profile, setProfile] = useState<UserProfile>({
+  const [userInfo, setUserInfo] = useState<UserProfile>({
     nickname: "",
     gender: null,
     nation: {
-      name: "South Korea",
+      name: "",
       flag: "",
     },
     location: "",
@@ -50,7 +50,7 @@ const SetUser: React.FC<PropsType> = ({ handleLoginStep }) => {
 
       setNationList(sortedData);
       if (sortedData.length > 0) {
-        setProfile((prev) => ({
+        setUserInfo((prev) => ({
           ...prev,
           nation: {
             name: sortedData[0].name,
@@ -68,34 +68,34 @@ const SetUser: React.FC<PropsType> = ({ handleLoginStep }) => {
   }, []);
 
   return (
-    <div>
+    <>
       <Title>빌드업 정보 입력하기</Title>
 
-      <Nickname profile={profile} setProfile={setProfile} />
-      <Gender profile={profile} setProfile={setProfile} />
+      <Nickname userInfo={userInfo} setUserInfo={setUserInfo} />
+      <Gender userInfo={userInfo} setUserInfo={setUserInfo} />
       <Nation
-        profile={profile}
-        setProfile={setProfile}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
         nationList={nationList}
       />
-      <Location profile={profile} setProfile={setProfile} />
-      <Ages profile={profile} setProfile={setProfile} />
+      <Location userInfo={userInfo} setUserInfo={setUserInfo} />
+      <Ages userInfo={userInfo} setUserInfo={setUserInfo} />
 
       <FixedButtonLayout>
         <Button
           className="text-white"
           disable={
-            !profile.nickname ||
-            profile.gender === null ||
-            !profile.nation.name ||
-            !profile.age
+            !userInfo.nickname ||
+            userInfo.gender === null ||
+            !userInfo.nation.name ||
+            !userInfo.age
           }
           buttonEvent={() => handleLoginStep(2)}
         >
           다음
         </Button>
       </FixedButtonLayout>
-    </div>
+    </>
   );
 };
 

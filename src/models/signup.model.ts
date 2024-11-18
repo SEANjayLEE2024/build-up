@@ -25,3 +25,13 @@ export interface CheckboxType {
   text: string;
   checked: boolean;
 }
+
+export type StrongFoot = "왼발" | "양발" | "오른발" | null;
+
+export interface PlayerProfile {
+  footballPosition: string[];
+  soccerPosition: string[];
+  career: string | null;
+  strongFoot: StrongFoot;
+  favoriteClub: string | null;
+}
