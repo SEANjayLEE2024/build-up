@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ClubFilterPropsI } from "../models/clubfilter";
 import { Regions } from "../utils/constants/Region";
@@ -13,6 +13,7 @@ export default function ClubList() {
     location: "",
     age: "",
     position: "",
+    page: 0,
   });
   const [regionLocationsArray, setRegionLocationArray] = useState<
     RegionLocationProps[]
@@ -61,9 +62,26 @@ export default function ClubList() {
     searchParams.set("location", filter.location);
     searchParams.set("position", filter.position);
     searchParams.set("age", filter.age);
-
+    searchParams.set("page", String(filter.page));
     setSearchParams(searchParams);
   }, [filter]);
+
+  // 무한 스크롤
+  const options = {
+    threshold: 1.0,
+  };
+  const callback = () => {
+    setFilter((current) => ({ ...current, page: current.page + 1 }));
+  };
+  const observer = new IntersectionObserver(callback, options);
+
+  const target = useRef(null);
+
+  useEffect(() => {
+    if (target.current) {
+      observer.observe(target.current);
+    }
+  }, []);
 
   return (
     <div>
@@ -112,6 +130,19 @@ export default function ClubList() {
           <option value="70대이상">70대이상</option>
         </select>
       </div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      <div className="bg-lime-500 w-52 h-52"></div>
+      {Array.from({ length: filter.page }).map((i) => (
+        <div id={String(i)} className="bg-lime-500 w-52 h-52"></div>
+      ))}
+
+      <div ref={target}></div>
     </div>
   );
 }
