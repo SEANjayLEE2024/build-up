@@ -5,6 +5,7 @@ import SignupPage from "./pages/Signup";
 import MyClubPage from "./pages/Myclub";
 import ClubFinder from "./pages/ClubFinder";
 import ClubCreation from "./pages/ClubCreation";
+import ClubList from "./pages/ClubList";
 import LoginPage from "./pages/Login";
 import ErrorPage from "./pages/Error";
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
         element: <ClubFinder />,
       },
       { path: "clubfinder/createclub", element: <ClubCreation /> },
+      { path: "clublist", element: <ClubList /> },
     ],
   },
 ]);
