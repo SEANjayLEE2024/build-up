@@ -28,37 +28,13 @@ export interface ClubCreationInputStateI {
   };
 }
 
-/**
- 
-  club_futsal_or_soccer: "futsal" | "soccer";
-  club_img: File[];
-  club_name: string;
-  club_location: string;
-  club_age: string;
-  club_gender: "남" | "여";
-  club_frequent_match_time: string;
-  club_fee: {
-    cycle: "매월" | "매주" | "매월" | "매번";
-    value: string;
+export interface RegionLocationProps {
+  type: "Feature";
+  properties: {
+    full_nm: string;
+    sig_cd: string;
+    sig_eng_nm: string;
+    sig_kor_nm: string;
   };
-  club_preferred_position: string;
-  club_team_tactics: string;
-
-데이터 POST시 보낼 내용.
- */
-
-/*
-export type ClubCreationInputs = {
-  club_futsal_or_soccer: "futsal" | "soccer";
-  club_img: File[];
-  club_name: string;
-  club_location: string;
-  club_age: string;
-  club_gender: "남" | "여";
-  club_frequent_match_time: string;
-  club_fee: string;
-  club_preferred_position: string;
-  club_team_tactics: string;
-};
-클럽 생성시 보내게 되는 데이터
-*/
+  id: string;
+}

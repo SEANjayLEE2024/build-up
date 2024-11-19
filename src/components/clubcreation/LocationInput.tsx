@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Regions } from "../../utils/constants/Region";
 import { fetchRegionLocation } from "../../api/clubcreation.api";
-import { ClubCreationInputStateI } from "../../models/clubcreation.model";
-
-interface RegionLocationProps {
-  type: "Feature";
-  properties: {
-    full_nm: string;
-    sig_cd: string;
-    sig_eng_nm: string;
-    sig_kor_nm: string;
-  };
-  id: string;
-}
+import {
+  ClubCreationInputStateI,
+  RegionLocationProps,
+} from "../../models/clubcreation.model";
 
 interface Props {
   clubCreationInputs: ClubCreationInputStateI;
