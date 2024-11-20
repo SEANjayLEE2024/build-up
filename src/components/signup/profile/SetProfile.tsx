@@ -1,8 +1,7 @@
 import Title from "../../common/Title";
 import targetImg from "../../../assets/images/target.png";
 import SetFootBallPosition from "./SetFootBallPosition";
-import { PlayerProfile } from "../../../models/signup.model";
-import { useState } from "react";
+import { UserProfile, PlayerProfile } from "../../../models/signup.model";
 import SetSoccerPosition from "./SetSoccerPosition";
 import SetCareer from "./SetCareer";
 import SetStrongFoot from "./SetStrongFoot";
@@ -10,17 +9,16 @@ import SetFavoriteClub from "./SetFavoriteClub";
 import FixedButtonLayout from "../../common/FixedButtonLayout";
 import Button from "../../common/Button";
 
-const SetProfile = () => {
-  const [profile, setProfile] = useState<PlayerProfile>({
-    footballPosition: [],
-    soccerPosition: [],
-    career: null,
-    strongFoot: null,
-    favoriteClub: null,
-  });
+interface PropsType {
+  userInfo: UserProfile;
+  profile: PlayerProfile;
+  setProfile: React.Dispatch<React.SetStateAction<PlayerProfile>>;
+}
 
+const SetProfile: React.FC<PropsType> = ({ userInfo, profile, setProfile }) => {
   const createProfile = () => {
     console.log("완성");
+    console.log(profile, userInfo);
   };
 
   return (

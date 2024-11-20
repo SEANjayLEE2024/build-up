@@ -44,7 +44,7 @@ const SetSoccerPosition: React.FC<PropsType> = ({ profile, setProfile }) => {
 
   return (
     <InputLayout
-      title="주요 풋살 포지션은 뭔가요?"
+      title="주요 축구 포지션은 뭔가요?"
       unit={`최대 ${SELECT_MAXIMUM}개`}
     >
       <div className="flex flex-wrap gap-2">

@@ -15,20 +15,16 @@ import Location from "./Location";
 import Ages from "./Ages";
 
 interface PropsType {
+  userInfo: UserProfile;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserProfile>>;
   handleLoginStep: (step: number) => void;
 }
 
-const SetUser: React.FC<PropsType> = ({ handleLoginStep }) => {
-  const [userInfo, setUserInfo] = useState<UserProfile>({
-    nickname: "",
-    gender: null,
-    nation: {
-      name: "",
-      flag: "",
-    },
-    location: "",
-    age: "",
-  });
+const SetUser: React.FC<PropsType> = ({
+  userInfo,
+  setUserInfo,
+  handleLoginStep,
+}) => {
   const [nationList, setNationList] = useState<NationInfo[]>([]);
 
   const getNations = async () => {

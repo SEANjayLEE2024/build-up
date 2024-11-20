@@ -24,7 +24,7 @@ const SetCareer: React.FC<PropsType> = ({ profile, setProfile }) => {
   };
 
   return (
-    <InputLayout title="주요 풋살 포지션은 뭔가요?">
+    <InputLayout title="경력이 어떻게 되나요?">
       <div className="flex flex-wrap gap-2">
         {OPTIONAL_ITEMS.map((item) => (
           <button
