@@ -32,7 +32,15 @@ const Checkbox: React.FC<PropsType> = ({ children, id, checked, onChange }) => {
             className="relative pl-7 cursor-pointer text-sm max-[359px]:text-xs font-medium base-primary"
             htmlFor={id}
           >
-            {children}
+            <span className={id === "all" ? "font-semibold" : "font-medium"}>
+              {children}
+            </span>
+            {id === "all" && (
+              <span className="text-base-tertiary font-semibold">
+                {" "}
+                (선택항목 포함)
+              </span>
+            )}
           </label>
         </div>
       </div>

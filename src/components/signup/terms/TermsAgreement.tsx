@@ -13,7 +13,7 @@ const TermsAgreement: React.FC<PropsType> = ({ handleLoginStep }) => {
   const [checkboxes, setCheckboxes] = useState<CheckboxType[]>([
     {
       id: "all",
-      text: "전체동의 (선택항목 포함)",
+      text: "전체동의",
       checked: false,
     },
     {
