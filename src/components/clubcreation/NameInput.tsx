@@ -1,6 +1,9 @@
 import React from "react";
 import { ClubCreationInputStateI } from "../../models/clubcreation.model";
-import { validationClubName } from "../../utils/validation/CreateClub";
+import {
+  validateAlphaNumericKorea,
+  validationClubName,
+} from "../../utils/validation/CreateClub";
 
 interface Props {
   clubCreationInputs: ClubCreationInputStateI;
@@ -28,6 +31,21 @@ export default function NameInput({
     }
   };
 
+  const onBlurInput = (event: React.FocusEvent<HTMLInputElement>) => {
+    const clubNameCurrent = event.target.value;
+
+    if (validateAlphaNumericKorea(clubNameCurrent)) {
+      setClubCreationInputs((prev) => ({ ...prev, clubName: clubNameCurrent }));
+      setClubCreationInputs((prev) => ({ ...prev, clubNameError: "" }));
+    } else if (!validateAlphaNumericKorea(clubNameCurrent)) {
+      setClubCreationInputs((prev) => ({ ...prev, clubName: "" }));
+      setClubCreationInputs((prev) => ({
+        ...prev,
+        clubNameError: "자음, 모음 사용은 불가능합니다.",
+      }));
+    }
+  };
+
   return (
     <>
       <label className="mt-10"></label>
@@ -36,6 +54,7 @@ export default function NameInput({
         className="p-2"
         onChange={onChangeClubName}
         placeholder="클럽 이름을 입력해주세요."
+        onBlur={onBlurInput}
       />
       {clubCreationInputs.clubNameError && (
         <span>{clubCreationInputs.clubNameError}</span>

@@ -74,9 +74,7 @@ export default function ClubList() {
     setFilter((current) => ({ ...current, page: current.page + 1 }));
   };
   const observer = new IntersectionObserver(callback, options);
-
   const target = useRef(null);
-
   useEffect(() => {
     if (target.current) {
       observer.observe(target.current);
