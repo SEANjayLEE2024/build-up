@@ -41,7 +41,7 @@ export default function NameInput({
       setClubCreationInputs((prev) => ({ ...prev, clubName: "" }));
       setClubCreationInputs((prev) => ({
         ...prev,
-        clubNameError: "자음, 모음 사용은 불가능합니다.",
+        clubNameError: "자음과 모음을 따로 사용할 수 없습니다.",
       }));
     }
   };
