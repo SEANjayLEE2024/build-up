@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ClubFilterPropsI } from "../models/clubfilter";
-import { Regions } from "../utils/constants/Region";
 import { futsalPosition, soccerPosition } from "../utils/constants/position";
-import { fetchRegionLocation } from "../api/clubcreation.api";
-import { RegionLocationProps } from "../models/clubcreation.model";
+import { Regions } from "../utils/constants/Region";
 
 type SortOrderT = string;
 
@@ -13,15 +11,13 @@ export default function ClubList() {
   const [futsalOrSoccer, setFutsalOrSoccer] = useState("풋살");
   const [filter, setFilter] = useState<ClubFilterPropsI>({
     location: "",
+    region: "",
     age: "",
     position: "",
     page: 0,
   });
 
   const [sortOrder, setSortOrder] = useState<SortOrderT>("DESC"); //최신순이 default(차후에는 오래된 순서로)
-  const [regionLocationsArray, setRegionLocationArray] = useState<
-    RegionLocationProps[]
-  >([]);
 
   const handleOnClickFutsalOrSoccer = (
     e: React.MouseEvent<HTMLButtonElement>
@@ -30,14 +26,9 @@ export default function ClubList() {
     setFutsalOrSoccer(clicked);
   };
 
-  const handleOnSelectLocation = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLocation = e.currentTarget.value;
-    setFilter((current) => ({ ...current, location: selectedLocation }));
-  };
-
   const handleOnSelectRegion = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedRegion = e.currentTarget.value;
-    setFilter((current) => ({ ...current, location: selectedRegion }));
+    setFilter((current) => ({ ...current, region: selectedRegion }));
   };
 
   const handleOnSelectPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -55,20 +46,16 @@ export default function ClubList() {
     setSortOrder(selectedSortOrder);
   };
 
-  useEffect(() => {
-    const getRegionLocation = async () => {
-      if (filter.location) {
-        const getRegionLocation = await fetchRegionLocation(filter.location);
-        const getRegionLocationArray =
-          getRegionLocation.result.featureCollection.features;
-        setRegionLocationArray(getRegionLocationArray);
-      }
-    };
-    getRegionLocation();
-  }, [filter.location]);
+  const handleOnSelectClubLocation = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedClubLocation = e.currentTarget.value;
+    setFilter((current) => ({ ...current, location: selectedClubLocation }));
+  };
 
   useEffect(() => {
     searchParams.set("location", filter.location);
+    searchParams.set("region", filter.region);
     searchParams.set("position", filter.position);
     searchParams.set("age", filter.age);
     searchParams.set("page", String(filter.page));
@@ -101,20 +88,17 @@ export default function ClubList() {
       <h1>클럽 리스트</h1>
 
       <div className="flex justify-between">
-        <select onChange={handleOnSelectLocation}>
-          {Regions.map((region) => (
-            <option value={region.regionValue}>{region.regionName}</option>
+        <select onChange={handleOnSelectClubLocation}>
+          {Object.keys(Regions).map((location) => (
+            <option value={location}>{location}</option>
           ))}
         </select>
-        {regionLocationsArray.length !== 0 && (
-          <select onChange={handleOnSelectRegion}>
-            {regionLocationsArray.map((region) => (
-              <option value={region.properties.sig_kor_nm.split(` `)[1]}>
-                {region.properties.sig_kor_nm}
-              </option>
+        <select onChange={handleOnSelectRegion}>
+          {filter.location &&
+            Regions[filter.location as keyof typeof Regions].map((region) => (
+              <option value={region}>{region}</option>
             ))}
-          </select>
-        )}
+        </select>
         <button
           onClick={handleOnClickFutsalOrSoccer}
           type="button"
@@ -122,6 +106,7 @@ export default function ClubList() {
         >
           {futsalOrSoccer === "축구" ? "풋살" : "축구"}
         </button>
+
         <select onChange={handleOnSelectPosition}>
           {futsalOrSoccer === "풋살" &&
             futsalPosition.map((position) => (
