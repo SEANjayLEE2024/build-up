@@ -52,10 +52,10 @@ const ConsonantAndVowel = [
 
 //자음 모음
 export const validationClubName = (clubName: string): boolean => {
-  return validateAlphaNumericKorea(clubName) && validateWhiteSpace(clubName);
+  return validateWhiteSpace(clubName);
 };
 
-const validateAlphaNumericKorea = (value: string) => {
+export const validateAlphaNumericKorea = (value: string) => {
   const valueArray = value.split(``);
   for (let i = 0; i < valueArray.length; i++) {
     if (ConsonantAndVowel.includes(valueArray[i])) {
@@ -63,6 +63,7 @@ const validateAlphaNumericKorea = (value: string) => {
     }
   }
   // 모음, 자음만 있는 Input 검증
+
   const regex = /^[a-zA-Z0-9가-힣]+$/;
   return regex.test(value);
   //영어, 숫자, 한글만 사용했는지 검증

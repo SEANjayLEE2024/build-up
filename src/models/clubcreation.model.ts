@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 
-export type ClubCreationInputHookI = {
+export interface ClubCreationInputHookI {
   clubFutsalOrSoccer: "futsal" | "soccer";
   clubImg: File[];
   clubAge: string;
@@ -8,7 +8,7 @@ export type ClubCreationInputHookI = {
   clubFrequentMatchTime: string;
   clubPreferredPosition: string;
   clubTeamTactics: string;
-};
+}
 
 export type ClubFormProps = {
   register: UseFormRegister<ClubCreationInputHookI>;
