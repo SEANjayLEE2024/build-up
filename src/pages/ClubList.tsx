@@ -6,6 +6,8 @@ import { futsalPosition, soccerPosition } from "../utils/constants/position";
 import { fetchRegionLocation } from "../api/clubcreation.api";
 import { RegionLocationProps } from "../models/clubcreation.model";
 
+type SortOrderT = string;
+
 export default function ClubList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [futsalOrSoccer, setFutsalOrSoccer] = useState("풋살");
@@ -15,6 +17,8 @@ export default function ClubList() {
     position: "",
     page: 0,
   });
+
+  const [sortOrder, setSortOrder] = useState<SortOrderT>("DESC"); //최신순이 default(차후에는 오래된 순서로)
   const [regionLocationsArray, setRegionLocationArray] = useState<
     RegionLocationProps[]
   >([]);
@@ -46,6 +50,11 @@ export default function ClubList() {
     setFilter((current) => ({ ...current, age: selectedAge }));
   };
 
+  const handleOnSelectSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSortOrder = e.currentTarget.value;
+    setSortOrder(selectedSortOrder);
+  };
+
   useEffect(() => {
     const getRegionLocation = async () => {
       if (filter.location) {
@@ -65,6 +74,11 @@ export default function ClubList() {
     searchParams.set("page", String(filter.page));
     setSearchParams(searchParams);
   }, [filter]);
+
+  useEffect(() => {
+    searchParams.set("sort", sortOrder);
+    setSearchParams(searchParams);
+  }, [sortOrder]);
 
   // 무한 스크롤
   const options = {
@@ -126,6 +140,11 @@ export default function ClubList() {
           <option value="50대">50대</option>
           <option value="60대">60대</option>
           <option value="70대이상">70대이상</option>
+        </select>
+
+        <select onChange={handleOnSelectSortOrder}>
+          <option value="DESC">최신순</option>
+          <option value="ASC">오래된순</option>
         </select>
       </div>
       <div className="bg-lime-500 w-52 h-52"></div>
